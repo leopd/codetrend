@@ -39,3 +39,7 @@ gem 'unicorn'
 
 # To use debugger
 # gem 'debugger'
+
+# XML package
+gem 'nokogiri'
+

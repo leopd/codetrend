@@ -55,6 +55,7 @@ GEM
       tzinfo (~> 0.3.22)
     moped (1.4.5)
     multi_json (1.7.9)
+    nokogiri (1.5.9)
     origin (1.1.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -114,6 +115,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mongoid
+  nokogiri
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
