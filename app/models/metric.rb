@@ -9,5 +9,5 @@ class Metric
 
     validates_presence_of :dataset, :techtag, :val, :day
 
-    index({dataset: 1, techtag: 1}, {background: true})
+    index({dataset: 1, techtag: 1, day: 1}, {background: true, unique: true})
 end
