@@ -1,5 +1,11 @@
 Codetrendror::Application.routes.draw do
-  resources :technologies
+  resources :technologies  do
+    member do
+        get 'metrics'
+    end
+  end
+
+  match 'tag/:techtag' => 'technologies#bytechtag'
 
 
   # The priority is based upon order of creation:

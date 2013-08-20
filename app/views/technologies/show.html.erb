@@ -11,5 +11,15 @@
 </p>
 
 
+<script>
+    var url = "<%= metrics_technology_path(@technology) %>.json";
+    chart_from_data_url(url);
+</script>
+
+<div id="chart">
+<svg></svg>
+</div>
+
+
 <%= link_to 'Edit', edit_technology_path(@technology) %> |
 <%= link_to 'Back', technologies_path %>

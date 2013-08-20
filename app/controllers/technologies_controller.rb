@@ -21,6 +21,19 @@ class TechnologiesController < ApplicationController
     end
   end
 
+
+  # GET /tag/java
+  # GET /tag/java.json
+  def bytechtag
+    @technology = Technology.find_by(techtag: params[:techtag])
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @technology }
+    end
+  end
+
+
   # GET /technologies/new
   # GET /technologies/new.json
   def new
@@ -31,6 +44,14 @@ class TechnologiesController < ApplicationController
       format.json { render json: @technology }
     end
   end
+
+
+  def metrics
+    @technology = Technology.find(params[:id])
+    @metrics = Metric.where(techtag: @technology.techtag).order_by(day: 1)
+    render json: @metrics
+  end
+
 
   # GET /technologies/1/edit
   def edit
