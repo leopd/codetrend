@@ -3,7 +3,8 @@ require 'nokogiri'
 
 
 class TagCounter
-    def initialize
+    def initialize(dataset)
+        @dataset = dataset
         @cnt = {}
     end
 
@@ -19,6 +20,19 @@ class TagCounter
             @cnt[key] = 1
         end
     end
+
+
+    def persist
+        @cnt.keys.each do |key|
+            m = Metric.new
+            m.dataset = @dataset
+            m.techtag = key[0]
+            m.day = key[1]
+            m.val = @cnt[key]
+            m.save!
+        end
+    end
+
 end
 
 
@@ -66,10 +80,13 @@ namespace :datadump do
         end
         puts "Parsing #{fn} into dataset #{dataset}..."
 
-        counter = TagCounter.new
+        counter = TagCounter.new(dataset)
         parser = Nokogiri::XML::SAX::Parser.new(StackExchangeDataDumpSaxParser.new(counter))
-        parser.parse(File.open(fn))
 
-        puts "Done!"
+        parser.parse(File.open(fn))
+        puts "Done parsing"
+
+        counter.persist
+        puts "Done saving"
     end
 end
