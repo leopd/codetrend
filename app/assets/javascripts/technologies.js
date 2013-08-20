@@ -3,14 +3,8 @@
 
 function chart_from_data_url(url) {
     console.log("Fetching JSON data from "+url);
-    $.ajax({
-        url: url,
-        success: function(data) {
-            render_chart(data);
-        },
-        error: function() {
-            alert("Error loading "+url);
-        }
+    d3.json(url,function(data) {
+        render_chart(data);
     });
 }
 
@@ -22,7 +16,7 @@ function render_chart(data) {
         key: 'so',
         values: _.map(data,function(d) {
             return {
-                "month": d.day,
+                "date": new Date(d.day),
                 "value": d.val,
             }
         })
@@ -31,12 +25,13 @@ function render_chart(data) {
 
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
-             .x(function(d) { return d.month })
+             .x(function(d) { return d.date })
              .y(function(d) { return d.value })
              ;
 
         chart.xAxis
-            .tickFormat(d3.format(',f'));
+            .tickFormat(function(d) { return d3.time.format('%x')(d) });
+
 
         chart.yAxis
             .tickFormat(d3.format(',.1f'));
