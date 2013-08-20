@@ -72,6 +72,8 @@ end
   
 
 namespace :datadump do
+
+    desc "Reads a Posts.xml file from stackexchange dump and loads into Metric model"
     task :load => :environment do
         fn = ENV['FILENAME']
         dataset = ENV['DATASET']
@@ -90,4 +92,17 @@ namespace :datadump do
         counter.persist
         puts "Done saving"
     end
+
+    # Doesn't currently check for existing ones.
+    desc "Creates a Technology object for each kind of :techtag in Metrics."
+    task :create_all_technologies => :environment do
+        Metric.distinct('techtag').each do |tag|
+           t = Technology.new
+           t.techtag = tag
+           t.name = tag.gsub("-"," ").titleize
+           t.save!
+        end
+    end
 end
+
+
