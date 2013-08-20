@@ -9,11 +9,12 @@ class TagCounter
     end
 
     def count(tag,datestr)
-        date = Date.parse(datestr)
-        key = [tag,date]
+        actual_date = Date.parse(datestr)
+        rounded_date = Date.new(actual_date.year, actual_date.month, 1)
+        key = [tag,rounded_date]
         if @cnt[key]
             @cnt[key] += 1
-            if @cnt[key] % 50 == 0
+            if @cnt[key] % 500 == 0
                 puts "#{key} has #{@cnt[key]}"
             end
         else
