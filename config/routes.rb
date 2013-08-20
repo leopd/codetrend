@@ -1,4 +1,7 @@
 Codetrendror::Application.routes.draw do
+  resources :technologies
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
