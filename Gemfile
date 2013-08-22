@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -38,9 +40,14 @@ gem 'unicorn'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-gem 'debugger'
-
 # XML package
 gem 'nokogiri'
+
+
+group :development do
+
+    # To use debugger
+    gem 'debugger'
+
+end
 
