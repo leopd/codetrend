@@ -1,15 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Technology:</b>
   <%= @technology.name %>
 </p>
-
-<p>
-  <b>Techtag:</b>
-  <%= @technology.techtag %>
-</p>
-
 
 <script>
     var url = "<%= metrics_technology_path(@technology) %>.json";
@@ -17,9 +11,8 @@
 </script>
 
 <div id="chart">
+<div class="note">Loading chart data...</div>
 <svg></svg>
 </div>
 
-
-<%= link_to 'Edit', edit_technology_path(@technology) %> |
 <%= link_to 'Back', technologies_path %>

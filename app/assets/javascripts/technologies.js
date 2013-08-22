@@ -42,6 +42,7 @@ function chart_from_data_url(url) {
         data = preprocess(data);
         console.log("preprocessed",data);
         render_chart(data);
+        $("#chart .note").html('');
     });
 }
 

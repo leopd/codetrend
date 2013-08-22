@@ -1,24 +1,12 @@
 <h1>Listing technologies</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Techtag</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul>
 <% @technologies.each do |technology| %>
-  <tr>
-    <td><%= technology.name %></td>
-    <td><%= technology.techtag %></td>
-    <td><%= link_to 'Show', technology %></td>
-    <td><%= link_to 'Edit', edit_technology_path(technology) %></td>
-    <td><%= link_to 'Destroy', technology, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <li>
+    <%= link_to technology.name, technology %>
+  </li>
 <% end %>
-</table>
+</ul>
 
 <%= paginate @technologies %>
 <br />
