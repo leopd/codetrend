@@ -159,17 +159,19 @@ function comparison_chart(descriptors) {
             });
         }
         render_chart_many(cdata, true);
+        $("#chart .note").html('');
     };
 
     for( i in descriptors ) {
         function fetchOne(url,name) {
+            // to avoid a classic trap of closures inside loops
             d3.json(url, function(data) {
                 downloaded(data, name);
             });
         }
         var descriptor = descriptors[i];
         console.log("Fetching "+descriptor.name+" data from "+descriptor.url);
-        fetchOne(descriptor.url, descriptor.name); // avoid a classic closure trap
+        fetchOne(descriptor.url, descriptor.name); 
     }
 }
 
