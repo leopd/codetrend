@@ -20,14 +20,20 @@
 </div>
 
 
-<% if @comparisons.count > 0 %>
-    <p>
-        Compare <%= @technology.name %> against other technologies...
+<p>
+    Compare <%= @technology.name %> against another technology...
+    <%= form_tag(compare_search_path, :method => :get) do %>
+        <%= hidden_field_tag(:tag1, @technology._id) %>
+        <%= text_field_tag(:query, '', :placeholder => 'Technology to compare to') %>
+        <%= submit_tag("search") %>
+    <% end %>
+    <% if @comparisons.count > 0 %>
+        Popular comparisons:
         <ul>
             <% @comparisons.each do |comparison| %>
                 <li><%= link_to comparison, "/compare/#{comparison.tag1}/vs/#{comparison.tag2}" %>
                 </li>
             <% end %>
         </ul>
-    </p>
-<% end %>
+    <% end %>
+</p>

@@ -14,6 +14,7 @@ Codetrendror::Application.routes.draw do
 
 
   match 'compare/:tag1/vs/:tag2' => 'comparisons#versus'
+  match 'compare/search' => 'comparisons#search'
 
 
   # The priority is based upon order of creation:
