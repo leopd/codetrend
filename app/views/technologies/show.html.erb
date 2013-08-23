@@ -19,3 +19,15 @@
 <svg></svg>
 </div>
 
+
+<% if @comparisons.count > 0 %>
+    <p>
+        Compare <%= @technology.name %> against other technologies...
+        <ul>
+            <% @comparisons.each do |comparison| %>
+                <li><%= link_to comparison, "/compare/#{comparison.tag1}/vs/#{comparison.tag2}" %>
+                </li>
+            <% end %>
+        </ul>
+    </p>
+<% end %>
