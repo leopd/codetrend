@@ -5,6 +5,10 @@
   <%= @technology.name %>
 </p>
 
+<p>
+    Read more about this technology on <a href="http://stackoverflow.com/tags/<%= @technology.techtag %>/info">StackOverflow</a>.
+</p>
+
 <script>
     var url = "<%= metrics_technology_path(@technology) %>.json";
     chart_from_data_url(url);
@@ -15,4 +19,3 @@
 <svg></svg>
 </div>
 
-<%= link_to 'Back', technologies_path %>

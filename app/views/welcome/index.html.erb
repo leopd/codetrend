@@ -5,6 +5,15 @@
 </p>
 
 <p>
-    <%= link_to 'Browse Technologies', technologies_path %>
+    Browse <%= link_to 'popular technologies', technologies_path %>
+    or
+    <%= link_to 'all known technologies', technologies_path( {:all => 1} ) %>
 </p>
 
+<p>
+    <%= form_tag(search_technologies_path, :method => :get) do %>
+        Or search for a technology by name:
+        <%= text_field_tag(:query) %>
+        <%= submit_tag("search") %>
+    <% end %>
+</p>

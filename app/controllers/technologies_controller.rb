@@ -65,6 +65,26 @@ class TechnologiesController < ApplicationController
   end
 
 
+  def search
+    @query = params[:query]
+    @technology = Technology.find_by(techtag: @query)
+    if @technology
+        redirect_to @technology
+    else
+        if @query.length > 0
+            flash[:alert] = "No technology found by the name of '#{@query}'."
+        else
+            flash[:notice] = "You must enter a search term."
+        end
+        begin
+            redirect_to :back
+        rescue ActionController::RedirectBackError
+            redirect_to root_path
+        end
+    end
+  end
+
+
   # GET /technologies/1/edit
   def edit
     @technology = Technology.find(params[:id])

@@ -2,6 +2,9 @@ Codetrendror::Application.routes.draw do
   get "welcome/index"
 
   resources :technologies  do
+    collection do
+        get 'search'
+    end
     member do
         get 'metrics'
     end
