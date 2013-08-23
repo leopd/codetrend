@@ -25,7 +25,8 @@ gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 
 gem 'mongoid'
-gem 'kaminari'
+gem 'kaminari'  # for pagination
+gem 'mongoid_taggable'
 
 
 # To use ActiveModel has_secure_password

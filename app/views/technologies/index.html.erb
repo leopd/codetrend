@@ -1,4 +1,4 @@
-<h1>Listing technologies</h1>
+<h1><%= @description %> Technologies</h1>
 
 <ul>
 <% @technologies.each do |technology| %>
@@ -9,8 +9,3 @@
 </ul>
 
 <%= paginate @technologies %>
-<br />
-
-<br />
-
-<%= link_to 'New Technology', new_technology_path %>

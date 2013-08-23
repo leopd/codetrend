@@ -60,6 +60,9 @@ GEM
       moped (~> 1.4.2)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
+    mongoid_taggable (1.1.1)
+      mongoid (>= 3)
+      rake
     moped (1.4.5)
     multi_json (1.7.9)
     nokogiri (1.5.9)
@@ -128,6 +131,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mongoid
+  mongoid_taggable
   nokogiri
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

@@ -2,7 +2,19 @@ class TechnologiesController < ApplicationController
   # GET /technologies
   # GET /technologies.json
   def index
-    @technologies = Technology.all.order_by(techtag: 1).page(params[:page]).per(100)
+    if params[:all]
+        @technologies = Technology.all
+        @description = "All"
+    else
+        if params[:tag]
+            @technologies = Technology.tagged_with(params[:tag])
+            @description = params[:tag]
+        else
+            @technologies = Technology.tagged_with('pow4')
+            @description = "Popular"
+        end
+    end
+    @technologies = @technologies.order_by(techtag: 1).page(params[:page]).per(100)
 
     respond_to do |format|
       format.html # index.html.erb
