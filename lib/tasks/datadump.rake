@@ -97,9 +97,7 @@ namespace :datadump do
     desc "Creates a Technology object for each kind of :techtag in Metrics."
     task :create_all_technologies => :environment do
         Metric.distinct('techtag').each do |tag|
-           t = Technology.new
-           t.techtag = tag
-           t.name = tag.gsub("-"," ").titleize
+           t = Technology.new_for_techtag(tag)
            t.save!
         end
     end
