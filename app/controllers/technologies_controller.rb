@@ -14,7 +14,7 @@ class TechnologiesController < ApplicationController
             @description = "Popular"
         end
     end
-    @technologies = @technologies.order_by(techtag: 1).page(params[:page]).per(100)
+    @technologies = @technologies.order_by(techtag: 1).page(params[:page]).per(30)
 
     respond_to do |format|
       format.html # index.html.erb
