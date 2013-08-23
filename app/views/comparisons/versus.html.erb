@@ -1,0 +1,22 @@
+<h1>
+  Which is better?  <%= @tech1.name %> or <%= @tech2.name %>
+</h1>
+
+<script>
+    comparison_chart([
+        {
+            url: "<%= metrics_technology_path(@tech1) %>.json",
+            name: "<%= @tech1.name %>"
+        },
+        {
+            url: "<%= metrics_technology_path(@tech2) %>.json",
+            name: "<%= @tech2.name %>"
+        }
+    ]);
+</script>
+
+<div id="chart">
+<div class="note">Loading chart data...</div>
+<svg></svg>
+</div>
+

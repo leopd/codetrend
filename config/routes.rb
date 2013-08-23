@@ -13,6 +13,9 @@ Codetrendror::Application.routes.draw do
   match 'tag/:techtag' => 'technologies#bytechtag'
 
 
+  match 'compare/:tag1/vs/:tag2' => 'comparisons#versus'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
