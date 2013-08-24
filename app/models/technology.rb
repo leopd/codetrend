@@ -9,7 +9,6 @@ class Technology
     validates_presence_of :name, :techtag
 
     index({techtag: 1}, {background: true, unique: true})
-    index({slug: 1}, {background: true, unique: true})
 
     def slug
         self._id
