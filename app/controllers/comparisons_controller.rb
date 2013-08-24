@@ -8,7 +8,7 @@ class ComparisonsController < ApplicationController
         raise ActionController::RoutingError.new('Not Found')
     end
 
-    Comparison.increment_count(@tech1, @tech2)
+    Comparison.increment_count_obj(@tech1, @tech2)
   end
 
 

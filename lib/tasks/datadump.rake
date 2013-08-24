@@ -8,7 +8,7 @@ class TagCounter
         @cnt = {}
     end
 
-    def count(tag,datestr)
+    def count_one(tag,datestr)
         actual_date = Date.parse(datestr)
         rounded_date = Date.new(actual_date.year, actual_date.month, 1)
         key = [tag,rounded_date]
@@ -23,6 +23,13 @@ class TagCounter
     end
 
 
+    def count(tags,date,attrs)
+        tags.each do |tag|
+            self.count_one(tag,date)
+        end
+    end
+
+
     def persist
         @cnt.keys.each do |key|
             m = Metric.new
@@ -33,7 +40,22 @@ class TagCounter
             m.save!
         end
     end
+end
 
+
+class VersusCounter
+    def count(tags, date, attrs)
+        if attrs['Title'] =~ /\bvs\b/i
+            (0..(tags.length-1)).each do |i|
+                (0..(i-1)).each do |j|
+                    t1 = tags[i]
+                    t2 = tags[j]
+                    #puts "Compare #{t1} vs #{t2}"
+                    Comparison.increment_count_techtag(t1,t2)  
+                end
+            end
+        end
+    end
 end
 
 
@@ -53,18 +75,21 @@ class StackExchangeDataDumpSaxParser < Nokogiri::XML::SAX::Document
     end
 
 
+    def tagstr_to_tags(tagstr)
+        if !tagstr
+            return []
+        end
+        tagstr.split(/[<>]/).map do |tag|
+            tag.length > 0 ? tag : nil
+        end.compact
+    end
+
     def start_element name, attrs = []
         if name == "row"
             hattrs = attrs_to_hash(attrs)
-            tags = hattrs['Tags']
+            tagstr = hattrs['Tags']
             date = hattrs['CreationDate']
-            if tags 
-                tags.split(/[<>]/).each do |tag|
-                    if tag.length > 0
-                        @counter.count(tag,date)
-                    end
-                end
-            end
+            @counter.count(tagstr_to_tags(tagstr),date,hattrs)
         end
     end
 
@@ -114,6 +139,23 @@ namespace :datadump do
             t.tags = tags.join(",")
             t.save!
         end
+    end
+
+
+    desc "Mine Posts.xml for posts with 'vs' in the title. Count them in comparisons"
+    task :mine_vs => :environment do
+        fn = ENV['FILENAME']
+        if (!fn) 
+            puts "ERROR! Must specify FILENAME=path/to/Posts.xml"
+            return
+        end
+        puts "Parsing #{fn} for vs posts"
+
+        counter = VersusCounter.new()
+        parser = Nokogiri::XML::SAX::Parser.new(StackExchangeDataDumpSaxParser.new(counter))
+
+        parser.parse(File.open(fn))
+        puts "Done parsing"
     end
 end
 
