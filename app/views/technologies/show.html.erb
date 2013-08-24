@@ -3,7 +3,8 @@
 <h2>Adoption Trend for <%= @technology.name %></h2>
 
 <p>
-    Read more about this technology on <a href="http://stackoverflow.com/tags/<%= @technology.techtag %>/info">StackOverflow</a>.
+    For a description of this technology, see <a href="http://stackoverflow.com/tags/<%= @technology.techtag %>/info">StackOverflow</a>.
+    (<a href="https://github.com/leopd/codetrend/issues/1">Why the link?</a>)
 </p>
 
 <script>
@@ -18,7 +19,7 @@
 
 
 <p>
-    Compare <%= @technology.name %> against another technology...
+    Compare <b><%= @technology.name %></b> against another technology...
     <%= form_tag(compare_search_path, :method => :get) do %>
         <%= hidden_field_tag(:slug1, @technology.slug) %>
         <%= text_field_tag(:query, '', :placeholder => 'Technology to compare to') %>

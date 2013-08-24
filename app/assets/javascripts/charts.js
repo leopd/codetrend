@@ -88,7 +88,7 @@ function render_chart(data) {
     console.log(data);
 
     var cdata = [{
-        key: 'so',
+        key: 'StackOverflow Posts',
         values: data
     }];
     console.log(cdata);

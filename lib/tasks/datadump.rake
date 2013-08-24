@@ -100,6 +100,8 @@ namespace :datadump do
 
     desc "Reads a Posts.xml file from stackexchange dump and loads into Metric model"
     task :load => :environment do
+        #TODO: This could be made a lot faster by parallelizing 
+        # One straightforward way would be to convert to a map/reduce job through hadoop or similar.
         fn = ENV['FILENAME']
         dataset = ENV['DATASET']
         if (!fn) || (!dataset) 
@@ -144,6 +146,8 @@ namespace :datadump do
 
     desc "Mine Posts.xml for posts with 'vs' in the title. Count them in comparisons"
     task :mine_vs => :environment do
+        #NOTE: not currently in use. 
+        # This in fact makes a lot of comparisons between same-stack technologies.
         fn = ENV['FILENAME']
         if (!fn) 
             puts "ERROR! Must specify FILENAME=path/to/Posts.xml"
