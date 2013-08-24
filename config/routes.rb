@@ -10,10 +10,10 @@ Codetrendror::Application.routes.draw do
     end
   end
 
-  match 'tag/:techtag' => 'technologies#bytechtag'
+  match 'tag/:techtag' => 'technologies#bytechtag', :techtag => { :user => /[^\/]+/ }
 
 
-  match 'compare/:tag1/vs/:tag2' => 'comparisons#versus'
+  match 'compare/:tag1/vs/:tag2' => 'comparisons#versus', :constraints => { :tag1 => /[^\/]+/, :tag2 => /[^\/]+/ }
   match 'compare/search' => 'comparisons#search'
 
 

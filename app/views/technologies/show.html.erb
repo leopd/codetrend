@@ -31,7 +31,7 @@
         Popular comparisons:
         <ul>
             <% @comparisons.each do |comparison| %>
-                <li><%= link_to comparison, "/compare/#{comparison.tag1}/vs/#{comparison.tag2}" %>
+                <li><%= link_to comparison, comparison.url %>
                 </li>
             <% end %>
         </ul>

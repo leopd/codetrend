@@ -6,8 +6,14 @@ class Comparison
 
     field :count, type: Integer, default: 0
 
+    validate :check_tags_different
+    def check_tags_different
+        errors.add(:tag2, "technologies must be different") if tag1 == tag2
+    end
+
     index({tag1: 1, tag2: 1}, {background: true, unique: true})
     index({tag1: 1, count: -1}, {background: true})
+    index({count: -1}, {background: true})
 
     def to_s
         "#{tag1} vs #{tag2}" # TODO: Use proper names from Technology model
@@ -30,6 +36,18 @@ class Comparison
 
     def self.top_for(tech)
         return Comparison.where(tag1: tech.techtag).order_by(count: -1).limit(10)
+    end
+
+
+    # an easy way to de-dupe
+    def forward?
+        return self.tag1 < self.tag2
+    end
+
+
+    def url
+        #TODO: use rails routes for this
+        "/compare/#{self.tag1}/vs/#{self.tag2}"
     end
 
 end
