@@ -103,6 +103,7 @@ function render_chart_many(cdata, usemulti) {
         var chart = chartMethod()
              .x(function(d) { return d.date })
              .y(function(d) { return d.value })
+             .color(['blue','orange','green','gray','purple'])
              ;
 
         chart.xAxis
@@ -114,7 +115,8 @@ function render_chart_many(cdata, usemulti) {
 
         d3.select('#chart svg')
             .datum(cdata)
-          .transition().duration(500).call(chart);
+          .transition().duration(500)
+          .call(chart);
 
         nv.utils.windowResize(chart.update);
 
