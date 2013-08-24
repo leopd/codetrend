@@ -130,7 +130,7 @@ function chart_from_data_url(url) {
         data = preprocessOne(data);
         console.log("preprocessed",data);
         render_chart(data);
-        $("#chart .note").html('');
+        $("#chart .loading-note").hide();
     });
 }
 
@@ -159,7 +159,7 @@ function comparison_chart(descriptors) {
             });
         }
         render_chart_many(cdata, true);
-        $("#chart .note").html('');
+        $("#chart .loading-note").hide();
     };
 
     for( i in descriptors ) {
