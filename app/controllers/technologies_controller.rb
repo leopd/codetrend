@@ -66,6 +66,9 @@ class TechnologiesController < ApplicationController
     @technology = Technology.find(params[:id])
     @metrics = Metric.where(techtag: @technology.techtag).order_by(day: 1)
     render json: @metrics
+    if Rails.env == "production"
+        expires_in 2.days, :public => true
+    end
   end
 
 
