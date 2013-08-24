@@ -1,19 +1,17 @@
 Codetrendror::Application.routes.draw do
   get "welcome/index"
 
+  match '/technologies/:id' => 'technologies#show', :constraints => { :id => /[^\/]+/ }
   resources :technologies  do
     collection do
         get 'search'
     end
     member do
-        get 'metrics'
+        get 'metrics', :constraints => { :id => /[^\/]+/ }
     end
   end
 
-  match 'tag/:techtag' => 'technologies#bytechtag', :techtag => { :user => /[^\/]+/ }
-
-
-  match 'compare/:tag1/vs/:tag2' => 'comparisons#versus', :constraints => { :tag1 => /[^\/]+/, :tag2 => /[^\/]+/ }
+  match 'compare/:slug1/vs/:slug2' => 'comparisons#versus', :constraints => { :slug1 => /[^\/]+/, :slug2 => /[^\/]+/ }
   match 'compare/search' => 'comparisons#search'
 
 

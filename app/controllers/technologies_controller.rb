@@ -26,6 +26,9 @@ class TechnologiesController < ApplicationController
   # GET /technologies/1.json
   def show
     @technology = Technology.find(params[:id])
+    if @technology.nil?
+        raise ActionController::RoutingError.new('Technology not found')
+    end
     @comparisons = Comparison.top_for(@technology)
 
     respond_to do |format|
@@ -70,6 +73,7 @@ class TechnologiesController < ApplicationController
     @query = params[:query]
     @technology = Technology.find_by(techtag: @query)
     if @technology
+        # We found it!
         redirect_to @technology
     else
         if @query.length > 0

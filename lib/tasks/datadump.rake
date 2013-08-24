@@ -122,21 +122,21 @@ namespace :datadump do
     desc "Creates a Technology object for each kind of :techtag in Metrics."
     task :create_all_technologies => :environment do
         Metric.distinct('techtag').each do |tag|
-            t = Technology.new do |t|
-                t.techtag = tag
-                t.name = tag.gsub("-"," ").titleize
-                t._id = tag.gsub(/[^a-zA-Z0-9\-]/,'_')
-            end
-            sum_metrics = Metric.where(techtag: t.techtag).reduce(0) do |tot, m|
-                tot + m.val
-            end
-            tags = []
-            (2..10).each do |x|
-                if sum_metrics >= 10**x
-                    tags.push("pow#{x}")
+            t = Technology.new_for_tag(tag)
+            add_popularity_tags = true  # Easily disable for quick testing
+            if add_popularity_tags
+                #NOTE: This is slow.  Faster to aggregate on server, but it's a one-time load.
+                sum_metrics = Metric.where(techtag: t.techtag).reduce(0) do |tot, m|
+                    tot + m.val
                 end
+                tags = []
+                (2..10).each do |x|
+                    if sum_metrics >= 10**x
+                        tags.push("pow#{x}")
+                    end
+                end
+                t.tags = tags.join(",")
             end
-            t.tags = tags.join(",")
             t.save!
         end
     end

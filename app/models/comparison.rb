@@ -16,7 +16,22 @@ class Comparison
     index({count: -1}, {background: true})
 
     def to_s
-        "#{tag1} vs #{tag2}" # TODO: Use proper names from Technology model
+        "#{tech1.name} vs #{tech2.name}"
+    end
+
+
+    def tech1
+        if ! @_tech1
+            @_tech1 = Technology.find_by(techtag: self.tag1)
+        end
+        @_tech1
+    end
+
+    def tech2
+        if ! @_tech2
+            @_tech2 = Technology.find_by(techtag: self.tag2)
+        end
+        @_tech2
     end
 
     def self.increment_count_obj(tech1, tech2)  # requires Technology objects
@@ -27,6 +42,7 @@ class Comparison
     def self.increment_count_techtag(tag1, tag2)
         [[tag1,tag2],[tag2,tag1]].each do |t1,t2|
             #TODO: use $inc in a moped update query to make this thread-safe at mongodb.
+            # This isn't a big deal right now because if we lose some logging data not the end of world.
             comp = Comparison.find_or_create_by(tag1: t1, tag2: t2)
             comp.count += 1
             comp.save!
@@ -34,20 +50,20 @@ class Comparison
     end
 
 
+    # Finds top Comparisons for a tech
     def self.top_for(tech)
         return Comparison.where(tag1: tech.techtag).order_by(count: -1).limit(10)
     end
 
 
-    # an easy way to de-dupe
+    # Use this to dedupe the forward/backwards pairs
     def forward?
         return self.tag1 < self.tag2
     end
 
 
-    def url
-        #TODO: use rails routes for this
-        "/compare/#{self.tag1}/vs/#{self.tag2}"
+    def path
+        "/compare/#{self.tech1.slug_esc}/vs/#{self.tech2.slug_esc}"
     end
 
 end

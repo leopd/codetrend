@@ -22,7 +22,7 @@
     Popular comparisons:
     <ul>
     <% @comparisons.each do |comparison| %>
-        <li><%= link_to comparison, comparison.url %>
+        <li><%= link_to comparison, comparison.path %> or
         </li>
     <% end %>
     </ul>

@@ -20,7 +20,7 @@
 <p>
     Compare <%= @technology.name %> against another technology...
     <%= form_tag(compare_search_path, :method => :get) do %>
-        <%= hidden_field_tag(:tag1, @technology._id) %>
+        <%= hidden_field_tag(:slug1, @technology.slug) %>
         <%= text_field_tag(:query, '', :placeholder => 'Technology to compare to') %>
         <%= submit_tag("search") %>
     <% end %>
@@ -28,7 +28,7 @@
         Popular comparisons:
         <ul>
             <% @comparisons.each do |comparison| %>
-                <li><%= link_to comparison, comparison.url %>
+                <li><%= link_to comparison, comparison.path %>
                 </li>
             <% end %>
         </ul>
