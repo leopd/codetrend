@@ -113,6 +113,8 @@ function render_chart_many(cdata, usemulti) {
         chart.yAxis
             .tickFormat(d3.format(',.0f'));
 
+        chart.showControls(false);
+
         d3.select('#chart svg')
             .datum(cdata)
           .transition().duration(500)
