@@ -1,11 +1,9 @@
 Codetrendror::Application.routes.draw do
   get "welcome/index"
 
+  match '/search/technologies' => 'technologies#search'
   match '/technologies/:id' => 'technologies#show', :constraints => { :id => /[^\/]+/ }
   resources :technologies  do
-    collection do
-        get 'search'
-    end
     member do
         get 'metrics', :constraints => { :id => /[^\/]+/ }
     end
