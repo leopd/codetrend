@@ -65,6 +65,7 @@ GEM
       rake
     moped (1.4.5)
     multi_json (1.7.9)
+    newrelic_rpm (3.6.1.88)
     nokogiri (1.5.9)
     origin (1.1.0)
     polyglot (0.3.3)
@@ -132,6 +133,7 @@ DEPENDENCIES
   kaminari
   mongoid
   mongoid_taggable
+  newrelic_rpm
   nokogiri
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
