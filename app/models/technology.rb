@@ -28,10 +28,16 @@ class Technology
         self.slug_esc
     end
 
-
     def self.slug_for_tag(tag)
         slug = tag.gsub(/[\/?]/,'_')
         #Rack::Utils.escape( slug )  # Don't store this in the data model.  This is a representation
+    end
+
+
+    def metatags
+        self.tags.split(',').map do |tag|
+            Metatag.find_by(tag: tag)
+        end.compact
     end
 
 

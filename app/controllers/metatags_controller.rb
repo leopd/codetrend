@@ -2,7 +2,7 @@ class MetatagsController < ApplicationController
   # GET /metatags
   # GET /metatags.json
   def index
-    @metatags = Metatag.all
+    @metatags = Metatag.all.order_by(tag: 1)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class MetatagsController < ApplicationController
   # GET /metatags/1
   # GET /metatags/1.json
   def show
-    @metatag = Metatag.find(params[:id])
+    @metatag = Metatag.find_by(tag: params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +34,7 @@ class MetatagsController < ApplicationController
 
   # GET /metatags/1/edit
   def edit
-    @metatag = Metatag.find(params[:id])
+    @metatag = Metatag.find_by(tag: params[:id])
   end
 
   # POST /metatags
@@ -56,7 +56,7 @@ class MetatagsController < ApplicationController
   # PUT /metatags/1
   # PUT /metatags/1.json
   def update
-    @metatag = Metatag.find(params[:id])
+    @metatag = Metatag.find_by(tag: params[:id])
 
     respond_to do |format|
       if @metatag.update_attributes(params[:metatag])
@@ -72,7 +72,7 @@ class MetatagsController < ApplicationController
   # DELETE /metatags/1
   # DELETE /metatags/1.json
   def destroy
-    @metatag = Metatag.find(params[:id])
+    @metatag = Metatag.find_by(tag: params[:id])
     @metatag.destroy
 
     respond_to do |format|

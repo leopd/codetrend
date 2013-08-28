@@ -6,8 +6,22 @@
 </p>
 
 <p>
+  <b>Title:</b>
+  <%= @metatag.title %>
+</p>
+
+<p>
   <b>Description:</b>
   <%= @metatag.description %>
+</p>
+
+<p>
+  <b>Users can apply?</b>
+  <% if @metatag.user_appliable %>
+    Yes
+  <% else %>
+    No
+  <% end %>
 </p>
 
 

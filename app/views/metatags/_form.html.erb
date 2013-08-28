@@ -16,8 +16,16 @@
     <%= f.text_field :tag %>
   </div>
   <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description, rows: 10 %>
+  </div>
+  <div class="field">
+    <%= f.check_box :user_appliable %>
+    <%= f.label :user_appliable %><br />
   </div>
   <div class="actions">
     <%= f.submit %>

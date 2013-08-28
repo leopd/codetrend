@@ -8,12 +8,15 @@ class Metatag
     max_versions 1000 # To prevent it from overflowing the mongo document
 
     field :tag, type: String
+    field :title, type: String
     field :description, type: String
+    field :user_appliable, type: Boolean, default: true
 
     index({tag: 1}, {background: true, unique: true})
+    index({user_appliable: 1, title: 1}, {background: true, unique: true})
 
     def slug
-        self._id
+        self.tag
     end
 
     def slug_esc

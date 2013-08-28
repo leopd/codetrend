@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Tag</th>
-    <th>Description</th>
+    <th>Title</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +12,7 @@
 <% @metatags.each do |metatag| %>
   <tr>
     <td><%= metatag.tag %></td>
-    <td><%= metatag.description %></td>
+    <td><%= metatag.title %></td>
     <td><%= link_to 'Show', metatag %></td>
     <td><%= link_to 'Edit', edit_metatag_path(metatag) %></td>
     <td><%= link_to 'Destroy', metatag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
