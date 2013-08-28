@@ -27,4 +27,10 @@ class Metatag
         self.slug_esc
     end
 
+
+    def technologies
+        # With proper mongoid relations, this would be automatic.  Oh well.  It's one line.
+        Technology.tagged_with(self.tag)
+    end
+
 end

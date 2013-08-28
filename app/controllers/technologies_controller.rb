@@ -29,7 +29,7 @@ class TechnologiesController < ApplicationController
     if @technology.nil?
         raise ActionController::RoutingError.new('Technology not found')
     end
-    @comparisons = Comparison.top_for(@technology)
+    @comparisons = best_comparisons_for(@technology)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -154,4 +154,20 @@ class TechnologiesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  protected
+    def best_comparisons_for(technology)
+        result = Comparison.top_for(technology)  # start with most popular
+        if technology.primary_metatag
+            similar_techs = technology.primary_metatag.technologies.select do |t|
+                t != technology  # Remove self from list
+            end
+            comparisons_to_similar = similar_techs.map do |similar_tech|
+                Comparison.find_or_create_by(tag1: technology.techtag, tag2: similar_tech.techtag)
+            end
+            result.concat(comparisons_to_similar)
+            result = result.uniq
+        end
+        result
+    end
 end
