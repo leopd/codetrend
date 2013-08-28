@@ -3,6 +3,7 @@
 class Technology
     include Mongoid::Document
     include Mongoid::Taggable
+    include Mongoid::Timestamps
     include Mongoid::Versioning
 
     max_versions 1000  # Just to keep it from overflowing the mongo document
