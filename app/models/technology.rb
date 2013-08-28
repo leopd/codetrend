@@ -1,10 +1,12 @@
+# A Technology is a tag in StackOverflow.  
+# Someday the set of Technologies here will likely diverge from SO, but for now they're the same.
 class Technology
     include Mongoid::Document
     include Mongoid::Taggable
 
-    field :_id, type: String
-    field :name, type: String
-    field :techtag, type: String
+    field :_id, type: String  # the URL version of techtag, not URL-escaped.  a.k.a. slug
+    field :name, type: String  # a friendly, printable name for the technology
+    field :techtag, type: String  # the string used in SO for the tag.
 
     validates_presence_of :name, :techtag
 
@@ -18,7 +20,7 @@ class Technology
         Rack::Utils.escape( self.slug )
     end
 
-    def to_param
+    def to_param  # This method gives the PK to rails for URLs in resources.
         self.slug_esc
     end
 

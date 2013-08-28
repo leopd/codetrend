@@ -1,4 +1,7 @@
 Codetrendror::Application.routes.draw do
+  resources :metatags
+
+
   get "welcome/index"
 
   match '/search/technologies' => 'technologies#search'

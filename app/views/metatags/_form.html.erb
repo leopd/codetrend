@@ -1,0 +1,25 @@
+<%= form_for(@metatag) do |f| %>
+  <% if @metatag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@metatag.errors.count, "error") %> prohibited this metatag from being saved:</h2>
+
+      <ul>
+      <% @metatag.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

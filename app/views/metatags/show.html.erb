@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tag:</b>
+  <%= @metatag.tag %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @metatag.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_metatag_path(@metatag) %> |
+<%= link_to 'Back', metatags_path %>
