@@ -11,7 +11,7 @@
     <% else %>
         <b>What is <%= @technology.name %>?</b>
         <%= form_tag(applymetatag_technology_path, :method => :post) do %>
-            <%= select_tag("metatag", options_for_select(Metatag.appliable_metatag_list) ) %>
+            <%= select_tag("metatag", options_for_select(appliable_metatags_select) ) %>
             <%= submit_tag("Categorize") %>
         <% end %>
     <% end %>

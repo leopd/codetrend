@@ -27,11 +27,4 @@ class Metatag
         self.slug_esc
     end
 
-
-    def self.appliable_metatag_list
-        Metatag.where({user_appliable: true}).map do |mt|
-            mt.tag
-        end
-    end
-
 end
