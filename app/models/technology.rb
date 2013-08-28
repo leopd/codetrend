@@ -34,10 +34,24 @@ class Technology
     end
 
 
+    # This will return Metatag objects that exist in the database.
+    # If it's a tag that doesn't have a Metatag associated with it (e.g. pow4) then it doesn't come out here.
     def metatags
         self.tags.split(',').map do |tag|
             Metatag.find_by(tag: tag)
         end.compact
+    end
+
+
+    def appliable_metatags
+        self.metatags.select do |mt|
+            mt.user_appliable
+        end
+    end
+
+
+    def primary_metatag
+        self.appliable_metatags.first
     end
 
 

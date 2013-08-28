@@ -7,8 +7,10 @@ Codetrendror::Application.routes.draw do
   match '/search/technologies' => 'technologies#search'
   match '/technologies/:id' => 'technologies#show', :constraints => { :id => /[^\/]+/ }
   resources :technologies  do
+    #NOTE: Seems there should be a DRY way to apply the same constraints to everything in the resource.
     member do
         get 'metrics', :constraints => { :id => /[^\/]+/ }
+        post 'applymetatag', :constraints => { :id => /[^\/]+/ }
     end
   end
 

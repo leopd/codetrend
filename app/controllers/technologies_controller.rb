@@ -49,6 +49,18 @@ class TechnologiesController < ApplicationController
     end
   end
 
+  
+  def applymetatag
+    @technology = Technology.find_by(techtag: params[:id])
+    @metatag = Metatag.find_by(tag: params[:metatag])
+    if ! @metatag
+        raise ActionController::RoutingError.new('Metatag not found')
+    end
+    @technology.tags_array.push( @metatag.tag ) # This would be easier if I was following mongo conventions
+    @technology.save!
+    redirect_to @technology, notice: 'Technology categorized. Thanks for contributing!'
+  end
+
 
   # GET /technologies/new
   # GET /technologies/new.json

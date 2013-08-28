@@ -1,10 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @technology.name %></h1>
-<h2>Developer activity trend</h2>
+<h3>Activity trend</h3>
 
 <p>
-    For a description of this technology, see <a href="http://stackoverflow.com/tags/<%= u @technology.techtag %>/info">StackOverflow</a>.
+    <% if @technology.primary_metatag %>
+        <%= @technology.name %> is a 
+        <%= @technology.primary_metatag.title %>
+        <!-- <%= link_to @technology.primary_metatag.title, @technology.primary_metatag %> -->
+    <% else %>
+        <b>What is <%= @technology.name %>?</b>
+        <%= form_tag(applymetatag_technology_path, :method => :post) do %>
+            <%= select_tag("metatag", options_for_select(Metatag.appliable_metatag_list) ) %>
+            <%= submit_tag("Categorize") %>
+        <% end %>
+    <% end %>
+
+</p>
+
+<p>
+    For a complete description of this technology, see <a href="http://stackoverflow.com/tags/<%= u @technology.techtag %>/info">StackOverflow</a>.
     (<a href="https://github.com/leopd/codetrend/issues/1">Why the link?</a>)
 </p>
 
