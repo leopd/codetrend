@@ -3,6 +3,9 @@
 class Technology
     include Mongoid::Document
     include Mongoid::Taggable
+    include Mongoid::Versioning
+
+    max_versions 1000  # Just to keep it from overflowing the mongo document
 
     field :_id, type: String  # the URL version of techtag, not URL-escaped.  a.k.a. slug
     field :name, type: String  # a friendly, printable name for the technology

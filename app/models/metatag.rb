@@ -2,6 +2,9 @@
 # Use-applied tags help group related Technologies together.
 class Metatag
     include Mongoid::Document
+    include Mongoid::Versioning
+
+    max_versions 1000 # To prevent it from overflowing the mongo document
 
     field :tag, type: String
     field :description, type: String
