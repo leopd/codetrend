@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @technology.name %></h1>
-<h3>Activity trend</h3>
 
 <p>
     <% if @technology.primary_metatag %>
@@ -9,8 +8,9 @@
         <%= @technology.primary_metatag.title %>
         <!-- <%= link_to @technology.primary_metatag.title, @technology.primary_metatag %> -->
     <% else %>
-        <b>What is <%= @technology.name %>?</b>
+        This technology has not yet been categorized.  
         <%= form_tag(applymetatag_technology_path, :method => :post) do %>
+            <b>What is <%= @technology.name %>?</b>
             <%= select_tag("metatag", options_for_select(appliable_metatags_select) ) %>
             <%= submit_tag("Categorize") %>
         <% end %>
