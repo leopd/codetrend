@@ -86,7 +86,7 @@ class TechnologiesController < ApplicationController
 
   def search
     #TODO: This search needs to be totally redone to include stemming and partials, etc.
-    @query = params[:query]
+    @query = params[:query].strip!
     @technology = Technology.find_by(techtag: @query)
     if @technology
         # We found it!
