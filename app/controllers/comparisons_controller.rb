@@ -18,7 +18,7 @@ class ComparisonsController < ApplicationController
         raise ActionController::RoutingError.new('Base technology not found')
     end
     #TODO: DRY this up with technologies#search action.
-    @tech2 = Technology.find_by(techtag: params[:query]).strip
+    @tech2 = Technology.find_by(techtag: params[:query].strip)
 
     if ! @tech2
         begin
