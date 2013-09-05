@@ -17,19 +17,31 @@
 </script>
 
 <p>
-    Developer discussions are a great indicator of activity and momentum for a technology.
+    Developer discussions are a great indicator of activity and momentum for a software technology.
     Compare number of StackOverflow posts per month referring to each technology.
 </p>
 
-<div id="chart">
+<div id="chart" class="uibox">
 <div class="loading-note">Loading chart data...</div>
 <svg></svg>
 </div>
 
 
-<p>
-    More about <%= link_to @tech1.name, @tech1 %>.
-</p>
-<p>
-    More about <%= link_to @tech2.name, @tech2 %>.
-</p>
+<div id="ugc" class="uibox">
+    <div id="good-comparison">
+        <b>Are these technologies good substitutes for each other?</b><br/>
+        <input type="button" value="YES, they do mostly the same thing">
+        <input type="button" value="Somewhat">
+        <input type="button" value="NO, they are not interchangeable">
+    </div>
+</div>
+
+<div id="links" class="uibox">
+
+  <% [@tech1, @tech2].each do |tech| %>
+  <div class="tech-comparison-ugc">
+    I think <%= tech.name %> is better for <input type="text"><br/>
+    More about <b><%= link_to tech.name, tech %></b>.<br/>
+  </div>
+  <% end %>
+</div>
